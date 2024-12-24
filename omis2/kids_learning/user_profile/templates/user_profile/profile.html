@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Профиль пользователя</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #2ecc71; 
+            padding: 20px;
+            color: white;
+            text-align: right; 
+        }
+        .sidebar {
+            width: 200px;
+            background-color: #1e17e0; 
+            color: white;
+            padding: 15px;
+            height: 100vh; 
+            position: fixed;
+            top: 0; 
+            display: flex;
+            flex-direction: column;
+        }
+        .header-content {
+            display: flex;
+            align-items: center; 
+            margin-bottom: 10px; 
+        }
+        .rectangles {
+            display: flex;
+            margin-right: 10px; 
+        }
+        .rectangle {
+            background-color: white;
+            width: 40px; 
+            height: 80px; 
+            border-radius: 5px; 
+            margin-right: 5px; 
+            position: relative; 
+        }
+        .black-rectangle {
+            background-color: black;
+            width: 18px;
+            height: 35px; 
+            border-radius: 5px; 
+            position: absolute; 
+            top: 65%;
+            left: 70%;
+            transform: translate(-50%, -50%); 
+        }
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 10px 0;
+        }
+        .content {
+            margin-left: 220px; 
+            padding: 20px;
+        }
+        .section {
+            margin-bottom: 20px;
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: black; 
+            margin: 10px 0; 
+        }
+        .footer {
+            margin-top: auto; /* Отдвигаем вниз */
+            padding-top: 20px; /* Отступ сверху */
+        }
+    </style>
+</head>
+<body>
+
+<div class="header"></div>
+
+<div class="sidebar">
+    <div class="header-content">
+        <div class="rectangles">
+            <div class="rectangle">
+                <div class="black-rectangle"></div>
+            </div>
+            <div class="rectangle">
+                <div class="black-rectangle"></div>
+            </div>
+        </div>
+        <a href="{% url 'profile' child_profile.user.id %}" id="username">{{ child_profile.user.username }}</a> 
+    </div>
+    <a href="{% url 'main_screen' %}">Главная</a>
+    <a href="{% url 'achievements' %}">Достижения</a>
+    <a href="{% url 'my_lessons' %}">Мои уроки</a>
+    <div class="footer">
+        <a href="{% url 'user_settings' %}">Настройки</a>
+        <a href="{% url 'logout' %}">Выйти</a>
+    </div>
+</div>
+
+<div class="content">
+    <div class="section">
+        <h1>Профиль пользователя: {{ child_profile.user.username }}</h1>
+        <p><strong>Электронная почта:</strong> {{ child_profile.user.email }}</p>
+        <p><strong>Интересы:</strong> {{ child_profile.interests }}</p>
+        <p><strong>Уровень:</strong> {{ child_profile.level }}</p>
+        <p><strong>История прогресса:</strong></p>
+        <pre>{{ child_profile.get_progress_history|safe }}</pre>
+    </div>
+</div>
+
+</body>
+</html>

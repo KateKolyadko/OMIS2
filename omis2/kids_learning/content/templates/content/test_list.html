@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список тестов</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: black; 
+        }
+        .test {
+            background-color: #e0e0e0; 
+            margin-bottom: 20px;
+            padding: 15px; 
+            border-radius: 5px; 
+        }
+        .button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 10px; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Список тестов</h1>
+    <a href="{% url 'main_screen' %}" class="button">Вернуться на главный экран</a>  
+    {% for test in tests %}
+        <div class="test">
+            <h3>{{ test.title }}</h3>
+            <a href="{% url 'test_detail' test.id %}" class="button">Начать тест</a>
+        </div>
+    {% empty %}
+        <p>Тесты не найдены.</p>
+    {% endfor %}
+</div>
+
+</body>
+</html>
